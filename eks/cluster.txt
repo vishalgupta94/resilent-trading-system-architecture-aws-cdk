@@ -1,0 +1,38 @@
+eksctl create cluster --name eks-demo --region ap-south-1 --zones ap-south-1a,ap-south-1b --without-nodegroup --profile profile339713054130
+
+
+eksctl utils associate-iam-oidc-provider --region ap-south-1 --cluster eks-demo --approve --profile profile339713054130
+eksctl get nodegroup --cluster=eksdemo2 --region ap-south-1 --profile profile339713054130
+eksctl create nodegroup --cluster=eks-demo \
+                       --region ap-south-1 \
+                       --name=eks-demo-ng-public \
+                       --node-type=t3.medium \
+                       --nodes=2 \
+                       --nodes-min=2 \
+                       --nodes-max=4 \
+                       --node-volume-size=20 \
+                       --ssh-access \
+                       --ssh-public-key=vishal-eks1 \
+                       --managed \
+                       --asg-access \
+                       --external-dns-access \
+                       --full-ecr-access \
+                       --appmesh-access \
+                       --alb-ingress-access \
+                       --node-private-networking   \
+                       --profile profile339713054130 
+                       
+
+eksctl get nodegroup --cluster=eksdemo2 --region ap-south-1 --profile profile339713054130
+
+eksctl delete nodegroup --cluster eksdemo2 --name=eksdemo2-ng-public2 --region ap-south-1 --profile profile339713054130 
+
+eksctl delete cluster --name eksdemo1 --region ap-south-1 --profile profile339713054130
+
+
+aws eks --region ap-south-1 update-kubeconfig --name eksdemo2
+
+eksctl get iamserviceaccount --cluster=eksdemo2 --region ap-south-1 --profile profile339713054130
+
+
+eksctl delete nodegroup --cluster eksdemo2 --name=eksdemo1-ng-public1 --region ap-south-1 --profile profile339713054130 

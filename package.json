@@ -8,14 +8,22 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk": "cdk"
+    "cdk": "cdk",
+    "check-broken-links": "ts-node test/check-broken-links.ts",
+    "check-broken-links-fast": "RECURSIVE=false ts-node test/check-broken-links.ts",
+    "check-broken-links-full": "RECURSIVE=true ts-node test/check-broken-links.ts",
+    "check-specific-links": "ts-node test/check-specific-links.ts",
+    "save-auth": "ts-node test/save-auth-state.ts"
   },
   "devDependencies": {
+    "@appfire/fuse-auth-core": "/Users/vishalgupta/Documents/apps/fuse-sdk/infrastructure/sdk/auth-core",
+    "@playwright/test": "^1.47.0",
     "@types/jest": "^29.5.14",
     "@types/node": "22.7.9",
     "aws-cdk": "2.1032.0",
     "esbuild": "^0.27.2",
     "jest": "^29.7.0",
+    "playwright": "^1.47.0",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typescript": "~5.9.3"
